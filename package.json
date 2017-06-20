@@ -1,8 +1,7 @@
 {
   "name": "soundcloud-player",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Dygerydoo <caserofrancisco@gmail.com>",
+  "description": "",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
