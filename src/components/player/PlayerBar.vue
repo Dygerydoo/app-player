@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import PlayerControls from '@/components/PlayerControls';
+import PlayerControls from '@/components/player/PlayerControls';
 
 export default {
   name: 'player-bar',
@@ -128,18 +128,27 @@ export default {
   position: absolute;
   margin-left: 90px;
 
-  .app-ProgressBar_Range {
-    width: 100%;
-    position: absolute;
-    top: -2px;
-    height: 3px;
-    -webkit-appearance: none;
-    z-index: 1;
-    background: transparent;
-
-    &:focus {
-      outline: none;
+  &:hover {
+    .app-ProgressBar_Range {
+      opacity: 1;
     }
+  }
+}
+
+.app-ProgressBar_Range {
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  height: 3px;
+  -webkit-appearance: none;
+  z-index: 1;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 200ms linear;
+
+  &:focus {
+    outline: none;
   }
 }
 
