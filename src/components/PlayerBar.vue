@@ -1,19 +1,29 @@
 <template>
-  <div class="app-PlayerBar">
+  <div class="app-Player">
+    <div v-if="$store.state.isPlaying || $store.state.isPaused" class="app-Player_ProgressBar">
+      <input type="range"
+             class="app-ProgressBar_Range"
+             min="0"
+             :max="$store.state.audio.duration"
+             v-model="$store.state.audio.currentTime">
+      <span ref="songProgress" class="app-Player_CurrentProgress"></span>
+    </div>
     <div class="wrapper">
-      <div class="app-PlayerBar_AlbumCover">
-        <img src="https://lh3.googleusercontent.com/I15JehkCt1tBXHZBcUUfoUMeUxFPl3nCywWy87L4mYKWuSEpLS-FzEptzhIVNkPbq-J0Qjjt=s90-c-e100" alt="Dada">
+      <div class="app-Player_AlbumCover" v-show="$store.state.isPlaying || $store.state.isPaused">
+        <!-- TODO: Clean this ternary -->
+        <img :src="songData.artwork ? songData.artwork : 'http://www.langitmusik.co.id/images/now_playing.jpg'" :alt="songData.artist">
+        {{songData.artwork}}
       </div>
-      <div class="app-PlayerBar_CurrentSong">
-        <p class="app-PlayerBar_SongName">Stairway to heaven</p>
-        <small class="app-PlayerBar_SongDetails">Led Zeppelin - Mothership(Remastered)</small>
+      <div class="app-Player_CurrentSong">
+        <p class="app-Player_SongName">{{songData.title}}</p>
+        <small class="app-Player_SongDetails">{{songData.artist}}</small>
       </div>
     </div>
     <player-controls></player-controls>
-    <div class="app-PlayerBar_SongTimer">
+    <div class="app-Player_SongTimer">
       <small>{{currentTime | humanizeTime}}/{{$store.state.audioDuration | humanizeTime}}</small>
     </div>
-    <audio id="playerId" ref="audiofile" src="http://vocaroo.com/media_command.php?media=s1StrCqnzQT6&command=download_mp3" preload="auto" style="display:none;"></audio>
+    <audio id="playerId" ref="audiofile" :src="songData.stream" preload="auto" style="display:none;"></audio>
   </div>
 </template>
 
@@ -23,15 +33,22 @@ import PlayerControls from '@/components/PlayerControls';
 export default {
   name: 'player-bar',
   props: {
-    file: {
-      type: String,
-      default: null,
+    songData: {
+      type: Object,
+      default() {
+        return {
+          title: '',
+          artwork: '',
+          artist: '',
+          stream: '',
+        };
+      },
     },
   },
   data() {
     return {
       loaded: false,
-      currentTime: '',
+      currentTime: 0,
     };
   },
   methods: {
@@ -43,6 +60,8 @@ export default {
     },
     currentAudioTime() {
       this.currentTime = this.$store.state.audio.currentTime;
+      console.log(this.$refs.songProgress);
+      this.$refs.songProgress.setAttribute('style', `width: ${(((this.currentTime / this.$store.state.audioDuration) * 100) + 0.3)}%`);
     },
   },
   mounted() {
@@ -56,41 +75,80 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .wrapper {
   display: flex;
   flex: 1;
 }
-.app-PlayerBar {
+
+.app-Player {
   display: flex;
   background: white;
-  box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.15);
   width: 100%;
   height: 90px;
   position: fixed;
   bottom: 0;
 }
 
-.app-PlayerBar_AlbumCover {
+.app-Player_AlbumCover {
+  width: 90px;
+  height: 90px;
   margin-right: 1em;
+
+  img {
+    width: 100%;
+    min-width: 90px;
+  }
 }
 
-.app-PlayerBar_CurrentSong {
+.app-Player_CurrentSong {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.app-PlayerBar_SongDetails {
+.app-Player_SongDetails {
   color: #555;
 }
 
-.app-PlayerBar_SongName {
+.app-Player_SongName {
   margin: 0;
   margin-bottom: .5em;
 }
 
-.app-PlayerBar_SongTimer {
+.app-Player_SongTimer {
   margin: 1em;
+}
+
+.app-Player_ProgressBar {
+  background: #bbb;
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  margin-left: 90px;
+
+  .app-ProgressBar_Range {
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    height: 3px;
+    -webkit-appearance: none;
+    z-index: 1;
+    background: transparent;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.app-Player_CurrentProgress {
+  min-width: 1%;
+  position: absolute;
+  top: 0;
+  background: #ff814a;
+  height: 3px;
+  appeareance: none;
 }
 </style>
