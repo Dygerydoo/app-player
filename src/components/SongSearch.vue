@@ -16,7 +16,6 @@
         <button class="app-PlayerControls_Play" @click="playSelected(index)" style="margin-left: auto;"><i class="material-icons">play_arrow</i></button>
       </li>
     </ul>
-    {{$data}}
   </div>
 </template>
 
@@ -39,6 +38,7 @@ export default {
           title: song.title,
           artwork: song.artwork_url,
           artist: song.user.username,
+          ownerId: song.user_id,
           stream: `${song.stream_url}?client_id=${process.env.CLIENT_ID}`,
         }));
       })

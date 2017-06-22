@@ -16,7 +16,8 @@
       </div>
       <div class="app-Player_CurrentSong">
         <p class="app-Player_SongName">{{songData.title}}</p>
-        <small class="app-Player_SongDetails">{{songData.artist}}</small>
+        <small class="app-Player_SongDetails">
+          <router-link :to="`user/${$store.state.selectedSong.ownerId}`">{{songData.artist}}</router-link></small>
       </div>
     </div>
     <player-controls></player-controls>
