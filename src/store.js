@@ -7,5 +7,9 @@ export const store = new Vuex.Store({
   state: {
     audio: '',
     audioDuration: '',
+    isPlaying: false,
+    isPaused: false,
+    searchResults: [],
+    selectedSong: {},
   },
 });
