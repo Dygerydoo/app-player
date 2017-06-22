@@ -11,5 +11,6 @@ export const store = new Vuex.Store({
     isPaused: false,
     searchResults: [],
     selectedSong: {},
+    ownerUser: {},
   },
 });
