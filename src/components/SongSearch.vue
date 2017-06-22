@@ -11,7 +11,7 @@
         <img :src="song.artwork ? song.artwork : 'http://www.langitmusik.co.id/images/now_playing.jpg'" alt="">
         <div class="app-SongSearch_ItemData">
           <p class="app-SongSearch_ItemTitle">{{song.title}}</p>
-          <small class="app-SongSearch_ItemSubtitle">{{song.artist}}</small>
+          <small class="app-SongSearch_ItemSubtitle"><router-link :to="{ name: 'user', params: {userId: $store.state.selectedSong.ownerId }}">{{song.artist}}</router-link></small>
         </div>
         <button class="app-PlayerControls_Play" @click="playSelected(index)" style="margin-left: auto;"><i class="material-icons">play_arrow</i></button>
       </li>

@@ -1,7 +1,7 @@
 <template>
   <main id="app">
     <header class="app-Header">
-      <img class="app-Header_Logo" src="./assets/logo.png">
+      <a class="app-Header_Logo" href="/"><img src="./assets/logo.png"></a>
       <song-search></song-search>
       <nav class="app-Navigation">
         <router-link :to="{ name: 'routeName', params: { property: value}}"><i class="material-icons">view_list</i></router-link>
@@ -34,6 +34,10 @@ export default {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 .app-Header {
   display: flex;
   height: 60px;
@@ -43,10 +47,11 @@ export default {
 
 .app-Header_Logo {
   align-self: center;
-  max-height: 45px;
   margin: 0 1em;
 
-  opacity: 0;
+  img {
+    max-height: 45px;
+  }
 }
 
 .app-Navigation {

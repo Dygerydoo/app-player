@@ -8,7 +8,7 @@
              v-model="$store.state.audio.currentTime">
       <span ref="songProgress" class="app-Player_CurrentProgress"></span>
     </div>
-    <div class="wrapper">
+    <div class="wrapper" v-cloak>
       <div class="app-Player_AlbumCover" v-show="$store.state.isPlaying || $store.state.isPaused">
         <!-- TODO: Clean this ternary -->
         <img :src="songData.artwork ? songData.artwork : 'http://www.langitmusik.co.id/images/now_playing.jpg'" :alt="songData.artist">
@@ -62,7 +62,6 @@ export default {
     },
     currentAudioTime() {
       this.currentTime = this.$store.state.audio.currentTime;
-      console.log(this.$refs.songProgress);
       this.$refs.songProgress.setAttribute('style', `width: ${(((this.currentTime / this.$store.state.audioDuration) * 100) + 0.3)}%`);
     },
   },

@@ -70,4 +70,9 @@ export default {
   margin: 0;
   color: #888;
 }
+
+.app-UserProfile_Description {
+  border-top: 1px solid #ddd;
+  padding-top: 1em;
+}
 </style>
