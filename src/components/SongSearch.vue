@@ -5,21 +5,15 @@
           v-model="searchQuery"
           @keyup="searchSongs(searchQuery)"
           placeholder="Búsqueda">
-    <ul v-if="listVisibility"
-        class="app-SongSearch_ListResults">
-      <li class="app-SongSearch_Item" v-for="(song, index) in $store.state.searchResults">
-        <img :src="song.artwork ? song.artwork : 'http://www.langitmusik.co.id/images/now_playing.jpg'" alt="">
-        <div class="app-SongSearch_ItemData">
-          <p class="app-SongSearch_ItemTitle">{{song.title}}</p>
-          <small class="app-SongSearch_ItemSubtitle"><router-link :to="{ name: 'user', params: {userId: $store.state.selectedSong.ownerId }}">{{song.artist}}</router-link></small>
-        </div>
-        <button class="app-PlayerControls_Play" @click="playSelected(index)" style="margin-left: auto;"><i class="material-icons">play_arrow</i></button>
-      </li>
-    </ul>
+    <div class="app-SongSearch_Results" v-if="listVisibility">
+      <button type="button" name="button" @click="listVisibility = false;">Cerrar</button>
+      <song-list :list-content="$store.state.searchResults"></song-list>
+    </div>
   </div>
 </template>
 
 <script>
+import SongList from '@/components/common/SongList';
 import { search } from '@/api';
 
 export default {
@@ -46,68 +40,25 @@ export default {
         this.errors.push(e);
       });
     },
-    playSelected(selectedIndexSong) {
-      this.$store.state.selectedSong = this.$store.state.searchResults[selectedIndexSong];
-      this.$store.state.audio.addEventListener('loadeddata', this.playLoaded);
-    },
-    playLoaded() {
-      this.$store.state.audio.play();
-      this.$store.state.isPlaying = true;
-      this.listVisibility = false;
-      this.searchQuery = '';
-    },
+  },
+  components: {
+    SongList,
   },
 };
 </script>
 <style lang="scss">
 .app-SongSearch {
-  margin-top: .5em;
   width: 100%;
   max-width: 600px;
 }
 
-.app-SongSearch_ListResults {
-  max-width: 600px;
-  margin: 0;
-  padding: 0;
-  background: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .35);
-  list-style: none;
-  max-height: 300px;
+.app-SongSearch_Results {
+  margin-top: .5em;
+  max-height: 400px;
   overflow: auto;
-}
-
-.app-SongSearch_Item {
-  display: flex;
-  align-items: center;
-  padding: .5em;
-  border-bottom: 1px solid #ddd;
-
-  img {
-    width: 45px;
-    height: 45px;
-    margin-right: 1em;
-  }
-
-  button {
-    display: none;
-  }
-
-  &:hover {
-
-    button {
-      display: block;
-    }
-  }
-}
-
-.app-SongSearch_ItemTitle {
-  margin: 0;
-}
-
-.app-SongSearch_ItemSubtitle {
-  color: #7e7e7e;
+  background: white;
+  z-index: 100;
+  border: 1px solid #ddd;
 }
 
 .app-Forms_Search {
@@ -120,6 +71,7 @@ export default {
   padding: 1em;
   font-size: 1em;
   width: 100%;
+  margin-top: .5em;
 
   &:hover {
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .25);
