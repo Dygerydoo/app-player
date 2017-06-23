@@ -30,8 +30,13 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  background: #f4f4f1;  
+}
+
 #app {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  margin-bottom: 120px;
 }
 
 [v-cloak] {

@@ -11,5 +11,10 @@ export default new Router({
       name: 'user',
       component: UserProfile,
     },
+    {
+      path: '/queue',
+      name: 'queue',
+      component: PlayList,
+    },
   ],
 });

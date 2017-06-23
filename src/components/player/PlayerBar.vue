@@ -120,6 +120,7 @@ export default {
 
 .app-Player_SongTimer {
   margin: 1em;
+  align-self: center;
 }
 
 .app-Player_ProgressBar {

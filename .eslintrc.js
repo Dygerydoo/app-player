@@ -31,6 +31,7 @@ module.exports = {
     'func-names': 'off',
     'global-require': 'off',
     'no-use-before-define': 0,
+    'no-param-reassign': 0,
     'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
