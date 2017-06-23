@@ -22,6 +22,9 @@
       </div>
     </div>
     <player-controls></player-controls>
+    <nav class="app-Player_Utilities">
+      <router-link to="/queue"><i class="material-icons">view_list</i></router-link>
+    </nav>
     <div class="app-Player_SongTimer">
       <small>{{currentTime | humanizeTime}}/{{$store.state.audioDuration | humanizeTime}}</small>
     </div>
@@ -90,6 +93,13 @@ export default {
   height: 90px;
   position: fixed;
   bottom: 0;
+}
+
+.app-Player_Utilities {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: 1em;
 }
 
 .app-Player_AlbumCover {

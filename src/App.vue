@@ -3,9 +3,6 @@
     <header class="app-Header">
       <a class="app-Header_Logo" href="/"><img src="./assets/logo.png"></a>
       <song-search></song-search>
-      <nav class="app-Navigation">
-        <router-link :to="{ name: 'routeName', params: { property: value}}"><i class="material-icons">view_list</i></router-link>
-      </nav>
     </header>
     <router-view></router-view>
     <player-bar :song-data="$store.state.selectedSong"></player-bar>
@@ -57,13 +54,6 @@ body {
   img {
     max-height: 45px;
   }
-}
-
-.app-Navigation {
-  align-items: center;
-  display: flex;
-  margin-left: auto;
-  margin-right: 1em;
 }
 
 .app-Buttons_Primary-rounded {
