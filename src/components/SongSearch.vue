@@ -6,8 +6,10 @@
           @keyup="searchSongs(searchQuery)"
           placeholder="Búsqueda">
     <div class="app-SongSearch_Results" v-if="listVisibility">
-      <button type="button" name="button" @click="listVisibility = false;">Cerrar</button>
-      <song-list @play-song="playSelected" :list-content="$store.state.searchResults"></song-list>
+      <button type="button" @click="listVisibility = false;">Cerrar</button>
+      <song-list @play-song="playSelected"
+                 @queue-song="queueSelected"
+                 :list-content="$store.state.searchResults"></song-list>
     </div>
   </div>
 </template>
@@ -44,13 +46,22 @@ export default {
     playSelected(event) {
       const filteredSong = this.$store.state.searchResults.find(song => song.id === event);
       this.$store.state.selectedSong = filteredSong;
-      this.$store.state.audio.addEventListener('loadeddata', this.playLoaded);
+      this.$store.state.audio.addEventListener('loadeddata', () => {
+        this.$store.state.audio.play();
+        this.$store.state.isPlaying = true;
+        this.searchQuery = '';
+      });
     },
-    playLoaded() {
-      this.$store.state.audio.play();
-      this.$store.state.isPlaying = true;
-      this.searchQuery = '';
+    queueSelected(event) {
+      const filteredSong = this.$store.state.searchResults.find(song => song.id === event);
+      this.$store.state.myQueue.push(filteredSong);
+      localStorage.setItem('queue', JSON.stringify(this.$store.state.myQueue));
     },
+    // playLoaded() {
+    //   this.$store.state.audio.play();
+    //   this.$store.state.isPlaying = true;
+    //   this.searchQuery = '';
+    // },
   },
   components: {
     SongList,

@@ -1,12 +1,11 @@
 <template>
   <ul class="app-SongList">
-    <li class="app-SongList_Item" v-for="(song, index) in listContent">
+    <li class="app-SongList_Item" v-for="song in listContent">
       <img :src="song.artwork ? song.artwork : 'http://www.langitmusik.co.id/images/now_playing.jpg'" alt="">
       <div class="app-SongList_ItemData">
         <p class="app-SongList_ItemTitle">{{song.title}}</p>
-        {{song.id}}
         <small class="app-SongSearch_ItemSubtitle">
-          <router-link :to="{ name: 'user', params: {userId: $store.state.selectedSong.ownerId }}">{{song.artist}}</router-link>
+          <router-link :to="{ name: 'user', params: {userId: song.ownerId }}">{{song.artist}}</router-link>
         </small>
       </div>
       <div class="app-SongList_Buttons">
@@ -32,9 +31,9 @@ export default {
     play(songId) {
       this.$emit('play-song', songId);
     },
-    // addToQueue(selectedIndexSong) {
-    //   this.$store.state.myQueue.push(this.$store.state.searchResults[selectedIndexSong]);
-    // },
+    queue(songId) {
+      this.$emit('queue-song', songId);
+    },
   },
 };
 </script>

@@ -1,6 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+const storagePlaylist = {
+  fetch() {
+    return JSON.parse(localStorage.getItem('queue') || '[]');
+  },
+};
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -13,9 +19,7 @@ export const store = new Vuex.Store({
     selectedSong: {},
     ownerUser: {},
     userPlaylist: [],
-    myQueue: [
-      { title: 'Hola', artist: 'Adios' },
-    ],
+    myQueue: storagePlaylist.fetch(),
   },
   mutations: {
     PLAY_SONG(state) {
