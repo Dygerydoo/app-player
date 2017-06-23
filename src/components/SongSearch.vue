@@ -7,7 +7,7 @@
           placeholder="Búsqueda">
     <div class="app-SongSearch_Results" v-if="listVisibility">
       <button type="button" name="button" @click="listVisibility = false;">Cerrar</button>
-      <song-list :list-content="$store.state.searchResults"></song-list>
+      <song-list @play-song="playSelected" :list-content="$store.state.searchResults"></song-list>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
           title: song.title,
           artwork: song.artwork_url,
           artist: song.user.username,
+          id: song.id,
           ownerId: song.user_id,
           stream: `${song.stream_url}?client_id=${process.env.CLIENT_ID}`,
         }));
@@ -39,6 +40,16 @@ export default {
       .catch((e) => {
         this.errors.push(e);
       });
+    },
+    playSelected(event) {
+      const filteredSong = this.$store.state.searchResults.find(song => song.id === event);
+      this.$store.state.selectedSong = filteredSong;
+      this.$store.state.audio.addEventListener('loadeddata', this.playLoaded);
+    },
+    playLoaded() {
+      this.$store.state.audio.play();
+      this.$store.state.isPlaying = true;
+      this.searchQuery = '';
     },
   },
   components: {

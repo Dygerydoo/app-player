@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import UserProfile from '@/components/UserProfile/UserProfile';
+import PlayList from '@/components/PlayList';
 
 Vue.use(Router);
 
