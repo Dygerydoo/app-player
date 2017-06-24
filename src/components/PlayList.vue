@@ -1,9 +1,15 @@
 <template>
   <div class="app-Queue">
     <h1>Tu cola de reproducción</h1>
-    <button type="button" class="app-Button_Primary"@click="emptyQueue">Borrar cola</button>
-    <song-list :list-content="$store.state.myQueue"
-               @play-song="playSelected"></song-list>
+    <template v-if="!queueIsEmpty">
+      <button type="button" class="app-Button_Primary" @click="emptyQueue">Borrar cola</button>
+      <song-list :list-content="$store.state.myQueue"
+                 @play-song="playSelected"></song-list>
+    </template>
+    <div class="app-Queue_Empty" v-else>
+      <h3>Todavía no has añadido nada a tu cola de reproducción</h3>
+      <p>Puedes añadir canciones usando el buscador en la parte superior</p>
+    </div>
   </div>
 </template>
 <script>
@@ -28,6 +34,12 @@ export default {
     },
     filterSongById(songId) {
       return this.$store.state.myQueue.find(song => song.id === songId);
+    },
+  },
+  computed: {
+    queueIsEmpty() {
+      if (this.$store.state.myQueue.length === 0) { return true; }
+      return false;
     },
   },
   components: {
