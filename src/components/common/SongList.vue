@@ -9,9 +9,9 @@
         </small>
       </div>
       <div class="app-SongList_Buttons">
-        <button class="app-PlayerControls_Play" @click="play(song.id, index)">
+        <button class="app-Buttons_Primary-flatRounded" @click="play(song.id, index)">
           <i class="material-icons">play_arrow</i></button>
-        <button class="app-PlayerControls_Queue" @click="queue(song.id, index)">
+        <button v-if="addable" class="app-Buttons_Primary-flatRounded" @click="queue(song.id, index)">
           <i class="material-icons">playlist_add</i>
         </button>
       </div>
@@ -58,7 +58,7 @@ export default {
 }
 
 .app-SongList_Buttons {
-  display: flex;
+  display: none;
   margin-left: auto;
 
   [class^='app-PlayerControls']:not(:last-child) {
@@ -78,13 +78,9 @@ export default {
     margin-right: 1em;
   }
 
-  .app-SongList_Buttons {
-    display: none;
-  }
-
   &:hover {
     .app-SongList_Buttons {
-      display: block;
+      display: flex;
     }
   }
 }

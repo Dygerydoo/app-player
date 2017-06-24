@@ -47,14 +47,17 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '~@/assets/stylesheets/foundation/config';
+@import '~@/assets/stylesheets/foundation/helpers';
+
 .app-UserProfile {
   display: flex;
-  background: white;
-  border: 1px solid #ddd;
   width: 60%;
-  margin: 1em auto;
   padding: 1em;
+  border: $border-default;
   border-radius: 2px;
+  margin: 1em auto;
+  background: $white;
 }
 
 .app-UserProfile_Avatar {
@@ -68,11 +71,11 @@ export default {
 
 .app-UserProfile_Location {
   margin: 0;
-  color: #888;
+  color: $grey-medium;
 }
 
 .app-UserProfile_Description {
-  border-top: 1px solid #ddd;
   padding-top: 1em;
+  border-top: $border-default;
 }
 </style>

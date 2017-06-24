@@ -79,6 +79,7 @@ export default {
 
 .app-SongSearch_Results {
   overflow: auto;
+  position: relative;
   z-index: 100;
   max-height: 400px;
   border: $border-default;

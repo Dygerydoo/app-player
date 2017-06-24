@@ -37,8 +37,19 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/assets/stylesheets/foundation/config';
+@import '~@/assets/stylesheets/foundation/helpers';
+
 .app-Queue {
   width: 90%;
   margin: 0 auto;
+}
+
+.app-Queue_Empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  background: $white;
 }
 </style>

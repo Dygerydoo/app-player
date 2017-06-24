@@ -35,9 +35,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import '~@/assets/stylesheets/foundation/config';
+@import '~@/assets/stylesheets/foundation/helpers';
+@import '~@/assets/stylesheets/components/buttons';
+
 .app-PlayerControls {
+  display: flex;
   flex: 1;
-  align-self: center;
+  align-items: center;
 }
 </style>

@@ -56,7 +56,7 @@ export default {
     },
     currentAudioTime() {
       this.currentTime = this.$store.state.audio.currentTime;
-      this.$refs.songProgress.setAttribute('style', `width: ${(((this.currentTime / this.$store.state.audioDuration) * 100) + 0.3)}%`);
+      this.$refs.songProgress.setAttribute('style', `width: ${(((this.currentTime / this.$store.state.audioDuration) * 100))}%`);
     },
   },
   mounted() {
@@ -112,6 +112,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 60%;
+  max-width: 250px;
 }
 
 .app-Player_SongDetails {
@@ -119,6 +121,7 @@ export default {
 }
 
 .app-Player_SongName {
+  @include ellipsis;
   margin: 0;
   margin-bottom: .5em;
 }
@@ -130,8 +133,8 @@ export default {
 
 .app-Player_ProgressBar {
   position: absolute;
-  width: 100%;
-  height: 3px;
+  width: calc(100% - 90px);
+  height: 5px;
   margin-left: 90px;
   background: $grey-light;
 
@@ -146,9 +149,10 @@ export default {
   cursor: pointer;
   position: absolute;
   top: -2px;
+  right: 0;
   z-index: 1;
   width: 100%;
-  height: 3px;
+  height: 5px;
   background: transparent;
   opacity: 0;
   transition: opacity 200ms linear;
@@ -164,7 +168,7 @@ export default {
   position: absolute;
   top: 0;
   min-width: 1%;
-  height: 3px;
+  height: 5px;
   background: $color-primary;
 }
 </style>
