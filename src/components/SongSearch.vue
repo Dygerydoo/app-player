@@ -52,16 +52,16 @@ export default {
         this.searchQuery = '';
       });
     },
-    queueSelected(event) {
-      const filteredSong = this.$store.state.searchResults.find(song => song.id === event);
-      this.$store.state.myQueue.push(filteredSong);
-      localStorage.setItem('queue', JSON.stringify(this.$store.state.myQueue));
+    queueSelected(songId) {
+      const AlreadyQueued = this.$store.state.myQueue.some(song => song.id === songId);
+      const filteredSong = this.$store.state.searchResults.find(song => song.id === songId);
+      if (!AlreadyQueued) {
+        this.$store.state.myQueue.push(filteredSong);
+        localStorage.setItem('queue', JSON.stringify(this.$store.state.myQueue));
+      } else {
+        alert('Ya ha sido añadida');
+      }
     },
-    // playLoaded() {
-    //   this.$store.state.audio.play();
-    //   this.$store.state.isPlaying = true;
-    //   this.searchQuery = '';
-    // },
   },
   components: {
     SongList,
