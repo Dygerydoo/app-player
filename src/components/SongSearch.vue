@@ -54,7 +54,7 @@ export default {
       });
     },
     queueSelected(songId) {
-      const AlreadyQueued = this.$store.state.getters.AlreadyQueued(songId);
+      const AlreadyQueued = this.$store.getters.AlreadyQueued(songId);
       const filteredSong = this.$store.getters.filterSongById(songId);
 
       if (!AlreadyQueued) {

@@ -167,7 +167,6 @@ export default {
   appearance: none;
   position: absolute;
   top: 0;
-  min-width: 1%;
   height: 5px;
   background: $color-primary;
 }
