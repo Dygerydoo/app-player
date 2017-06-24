@@ -1,12 +1,11 @@
 <template>
-  <div class="app-SongSearch">
+  <div class="app-SongSearch" v-on-clickaway="hideResultList">
     <input class="app-Forms_Search"
           type="search"
           v-model="searchQuery"
           @keyup="searchSongs(searchQuery)"
           placeholder="Búsqueda">
     <div class="app-SongSearch_Results" v-if="listVisibility">
-      <button type="button" @click="listVisibility = false;">Cerrar</button>
       <song-list @play-song="playSelected"
                  @queue-song="queueSelected"
                  :addable="true"
@@ -17,10 +16,12 @@
 
 <script>
 import SongList from '@/components/common/SongList';
+import { mixin as clickaway } from 'vue-clickaway';
 import { search } from '@/api';
 
 export default {
   name: 'song-search',
+  mixins: [clickaway],
   data() {
     return {
       searchQuery: '',
@@ -29,6 +30,9 @@ export default {
     };
   },
   methods: {
+    hideResultList() {
+      this.listVisibility = false;
+    },
     searchSongs(value) {
       this.listVisibility = true;
       search(value).then((response) => {
