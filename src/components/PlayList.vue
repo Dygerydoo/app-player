@@ -23,6 +23,7 @@ export default {
     },
     emptyQueue() {
       localStorage.removeItem('queue');
+      this.$store.state.myQueue = [];
     },
   },
   components: {

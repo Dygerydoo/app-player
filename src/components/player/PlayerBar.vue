@@ -39,14 +39,6 @@ export default {
   props: {
     songData: {
       type: Object,
-      default() {
-        return {
-          title: '',
-          artwork: '',
-          artist: '',
-          stream: '',
-        };
-      },
     },
   },
   data() {

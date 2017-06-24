@@ -9,9 +9,9 @@
         </small>
       </div>
       <div class="app-SongList_Buttons">
-        <button class="app-PlayerControls_Play" @click="play(song.id)" style="margin-left: auto;">
+        <button class="app-PlayerControls_Play" @click="play(song.id)">
           <i class="material-icons">play_arrow</i></button>
-        <button class="app-PlayerControls_Play" @click="queue(song.id)" style="margin-left: auto;">
+        <button class="app-PlayerControls_Queue" @click="queue(song.id)">
           <i class="material-icons">playlist_add</i>
         </button>
       </div>
@@ -23,12 +23,7 @@ import AlbumArtwork from '@/components/common/AlbumArtwork';
 
 export default {
   name: 'song-list',
-  props: ['list-content'],
-  data() {
-    return {
-
-    };
-  },
+  props: ['listContent'],
   methods: {
     play(songId) {
       this.$emit('play-song', songId);
@@ -65,6 +60,10 @@ export default {
 .app-SongList_Buttons {
   display: flex;
   margin-left: auto;
+
+  [class^='app-PlayerControls']:not(:last-child) {
+    margin-right: .5em;
+  }
 }
 
 .app-SongList_Item {
@@ -79,12 +78,12 @@ export default {
     margin-right: 1em;
   }
 
-  button {
+  .app-SongList_Buttons {
     display: none;
   }
 
   &:hover {
-    button {
+    .app-SongList_Buttons {
       display: block;
     }
   }
