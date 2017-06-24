@@ -1,7 +1,7 @@
 <template>
   <ul class="app-SongList">
     <li class="app-SongList_Item" v-for="song in listContent">
-      <img :src="song.artwork ? song.artwork : 'http://www.langitmusik.co.id/images/now_playing.jpg'" alt="">
+      <album-artwork :src="song.artwork" alt="'song.title'" :size="45"></album-artwork>
       <div class="app-SongList_ItemData">
         <p class="app-SongList_ItemTitle">{{song.title}}</p>
         <small class="app-SongSearch_ItemSubtitle">
@@ -19,6 +19,8 @@
   </ul>
 </template>
 <script>
+import AlbumArtwork from '@/components/common/AlbumArtwork';
+
 export default {
   name: 'song-list',
   props: ['list-content'],
@@ -34,6 +36,9 @@ export default {
     queue(songId) {
       this.$emit('queue-song', songId);
     },
+  },
+  components: {
+    AlbumArtwork,
   },
 };
 </script>

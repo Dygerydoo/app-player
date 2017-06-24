@@ -10,14 +10,12 @@
     </div>
     <div class="wrapper" v-cloak>
       <div class="app-Player_AlbumCover" v-show="$store.state.isPlaying || $store.state.isPaused">
-        <!-- TODO: Clean this ternary -->
-        <img :src="songData.artwork ? songData.artwork : 'http://www.langitmusik.co.id/images/now_playing.jpg'" :alt="songData.artist">
-        {{songData.artwork}}
+        <album-artwork :src="songData.artwork" :alt="songData.artist" :size="90"></album-artwork>
       </div>
       <div class="app-Player_CurrentSong">
         <p class="app-Player_SongName">{{songData.title}}</p>
         <small class="app-Player_SongDetails">
-          <router-link :to="{ name: 'user', params: {userId: $store.state.selectedSong.ownerId }}">{{songData.artist}}</router-link>
+          <router-link :to="{ name: 'user', params: {userId: songData.ownerId }}">{{songData.artist}}</router-link>
         </small>
       </div>
     </div>
@@ -34,6 +32,7 @@
 
 <script>
 import PlayerControls from '@/components/player/PlayerControls';
+import AlbumArtwork from '@/components/common/AlbumArtwork';
 
 export default {
   name: 'player-bar',
@@ -75,6 +74,7 @@ export default {
   },
   components: {
     PlayerControls,
+    AlbumArtwork,
   },
 };
 </script>
