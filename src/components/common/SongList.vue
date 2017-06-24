@@ -1,6 +1,6 @@
 <template>
   <ul class="app-SongList">
-    <li class="app-SongList_Item" v-for="song in listContent">
+    <li class="app-SongList_Item" v-for="(song, index) in listContent">
       <album-artwork :src="song.artwork" alt="'song.title'" :size="45"></album-artwork>
       <div class="app-SongList_ItemData">
         <p class="app-SongList_ItemTitle">{{song.title}}</p>
@@ -9,9 +9,9 @@
         </small>
       </div>
       <div class="app-SongList_Buttons">
-        <button class="app-PlayerControls_Play" @click="play(song.id)">
+        <button class="app-PlayerControls_Play" @click="play(song.id, index)">
           <i class="material-icons">play_arrow</i></button>
-        <button class="app-PlayerControls_Queue" @click="queue(song.id)">
+        <button class="app-PlayerControls_Queue" @click="queue(song.id, index)">
           <i class="material-icons">playlist_add</i>
         </button>
       </div>
@@ -25,11 +25,11 @@ export default {
   name: 'song-list',
   props: ['listContent'],
   methods: {
-    play(songId) {
-      this.$emit('play-song', songId);
+    play(songId, index) {
+      this.$emit('play-song', songId, index);
     },
-    queue(songId) {
-      this.$emit('queue-song', songId);
+    queue(songId, index) {
+      this.$emit('queue-song', songId, index);
     },
   },
   components: {

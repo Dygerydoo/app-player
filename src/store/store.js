@@ -20,6 +20,8 @@ export const store = new Vuex.Store({
     ownerUser: {},
     userPlaylist: [],
     myQueue: storagePlaylist.fetch(),
+    currentIndexSongQueue: undefined,
+    mainQueue: [],
   },
   mutations: {
     PLAY_SONG(state) {

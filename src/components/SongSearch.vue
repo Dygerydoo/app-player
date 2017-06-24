@@ -43,8 +43,8 @@ export default {
         this.errors.push(e);
       });
     },
-    playSelected(event) {
-      const filteredSong = this.$store.state.searchResults.find(song => song.id === event);
+    playSelected(songId) {
+      const filteredSong = this.$store.state.searchResults.find(song => song.id === songId);
       this.$store.state.selectedSong = filteredSong;
       this.$store.state.audio.addEventListener('loadeddata', () => {
         this.$store.state.audio.play();

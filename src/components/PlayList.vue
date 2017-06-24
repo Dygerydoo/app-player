@@ -12,9 +12,10 @@ import SongList from '@/components/common/SongList';
 export default {
   name: 'app-queue',
   methods: {
-    playSelected(event) {
-      const filteredSong = this.$store.state.myQueue.find(song => song.id === event);
-      this.$store.state.selectedSong = filteredSong;
+    playSelected(songId, index) {
+      this.$store.state.mainQueue = this.$store.state.myQueue;
+      this.$store.state.selectedSong = this.filterSongById(songId);
+      this.$store.state.currentIndexSongQueue = index;
       this.$store.state.audio.addEventListener('loadeddata', () => {
         this.$store.state.audio.play();
         this.$store.state.isPlaying = true;
@@ -24,6 +25,9 @@ export default {
     emptyQueue() {
       localStorage.removeItem('queue');
       this.$store.state.myQueue = [];
+    },
+    filterSongById(songId) {
+      return this.$store.state.myQueue.find(song => song.id === songId);
     },
   },
   components: {
