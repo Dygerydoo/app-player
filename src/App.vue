@@ -27,13 +27,16 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/assets/stylesheets/foundation/config';
+@import '~@/assets/stylesheets/foundation/helpers';
+
 body {
-  background: #f4f4f1;  
+  background: $grey-lightest;
 }
 
 #app {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   margin-bottom: 120px;
+  font-family: $font-family-primary;
 }
 
 [v-cloak] {
@@ -43,8 +46,8 @@ body {
 .app-Header {
   display: flex;
   height: 60px;
-  background: white;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .15);
+  background: $white;
+  box-shadow: $box-shadow-default;
 }
 
 .app-Header_Logo {

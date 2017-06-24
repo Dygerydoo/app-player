@@ -38,20 +38,23 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '~@/assets/stylesheets/foundation/config';
+@import '~@/assets/stylesheets/foundation/helpers';
+
 .app-SongList {
   padding: 0;
-  background: white;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .35);
+  background: $white;
+  box-shadow: $box-shadow-default;
 }
 
 .app-SongList_Results {
-  max-width: 600px;
-  margin: 0;
-  padding: 0;
-  background: white;
   list-style: none;
-  max-height: 300px;
   overflow: auto;
+  max-width: 600px;
+  max-height: 300px;
+  padding: 0;
+  margin: 0;
+  background: $white;
 }
 
 .app-SongList_Buttons {
@@ -63,7 +66,7 @@ export default {
   display: flex;
   align-items: center;
   padding: .5em;
-  border-bottom: 1px solid #ddd;
+  border-bottom: $border-default;
 
   img {
     width: 45px;
@@ -76,7 +79,6 @@ export default {
   }
 
   &:hover {
-
     button {
       display: block;
     }
@@ -84,10 +86,12 @@ export default {
 }
 
 .app-SongList_ItemTitle {
+  @include ellipsis;
+  width: 350px;
   margin: 0;
 }
 
 .app-SongList_ItemSubtitle {
-  color: #7e7e7e;
+  color: $grey-medium;
 }
 </style>

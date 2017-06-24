@@ -11,7 +11,6 @@ export default {
   name: 'app-queue',
   methods: {
     playSelected(event) {
-      console.log(event);
       const filteredSong = this.$store.state.searchResults.find(song => song.id === event);
       this.$store.state.selectedSong = filteredSong;
       this.$store.state.audio.addEventListener('loadeddata', () => {
@@ -26,6 +25,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 .app-Queue {
   width: 90%;

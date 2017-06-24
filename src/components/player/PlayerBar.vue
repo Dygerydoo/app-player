@@ -80,6 +80,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~@/assets/stylesheets/foundation/config';
+@import '~@/assets/stylesheets/foundation/helpers';
+
 .wrapper {
   display: flex;
   flex: 1;
@@ -87,19 +90,19 @@ export default {
 
 .app-Player {
   display: flex;
-  background: white;
-  box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.15);
-  width: 100%;
-  height: 90px;
   position: fixed;
   bottom: 0;
+  width: 100%;
+  height: 90px;
+  background: $white;
+  box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .app-Player_Utilities {
-  align-items: center;
   display: flex;
-  margin-left: auto;
+  align-items: center;
   margin-right: 1em;
+  margin-left: auto;
 }
 
 .app-Player_AlbumCover {
@@ -120,7 +123,7 @@ export default {
 }
 
 .app-Player_SongDetails {
-  color: #555;
+  color: $grey-medium;
 }
 
 .app-Player_SongName {
@@ -129,16 +132,16 @@ export default {
 }
 
 .app-Player_SongTimer {
-  margin: 1em;
   align-self: center;
+  margin: 1em;
 }
 
 .app-Player_ProgressBar {
-  background: #bbb;
-  height: 3px;
-  width: 100%;
   position: absolute;
+  width: 100%;
+  height: 3px;
   margin-left: 90px;
+  background: $grey-light;
 
   &:hover {
     .app-ProgressBar_Range {
@@ -148,16 +151,16 @@ export default {
 }
 
 .app-ProgressBar_Range {
-  width: 100%;
+  cursor: pointer;
   position: absolute;
   top: -2px;
-  height: 3px;
-  -webkit-appearance: none;
   z-index: 1;
+  width: 100%;
+  height: 3px;
   background: transparent;
-  cursor: pointer;
   opacity: 0;
   transition: opacity 200ms linear;
+  -webkit-appearance: none;
 
   &:focus {
     outline: none;
@@ -165,11 +168,11 @@ export default {
 }
 
 .app-Player_CurrentProgress {
-  min-width: 1%;
+  appearance: none;
   position: absolute;
   top: 0;
-  background: #ff814a;
+  min-width: 1%;
   height: 3px;
-  appeareance: none;
+  background: $color-primary;
 }
 </style>

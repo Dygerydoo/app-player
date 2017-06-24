@@ -69,34 +69,37 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '~@/assets/stylesheets/foundation/config';
+@import '~@/assets/stylesheets/foundation/helpers';
+
 .app-SongSearch {
   width: 100%;
   max-width: 600px;
 }
 
 .app-SongSearch_Results {
-  margin-top: .5em;
-  max-height: 400px;
   overflow: auto;
-  background: white;
   z-index: 100;
-  border: 1px solid #ddd;
+  max-height: 400px;
+  border: $border-default;
+  margin-top: .5em;
+  background: $white;
 }
 
 .app-Forms_Search {
-  background: #f4f4f4;
-  -webkit-appearance: none;
+  align-self: center;
+  width: 100%;
+  height: 45px;
+  padding: 1em;
   border: 0;
   border-radius: 2px;
-  height: 45px;
-  align-self: center;
-  padding: 1em;
-  font-size: 1em;
-  width: 100%;
   margin-top: .5em;
+  background: $grey-lightest;
+  font-size: $font-size-m;
+  -webkit-appearance: none;
 
   &:hover {
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .25);
+    box-shadow: $box-shadow-default;
   }
 }
 </style>

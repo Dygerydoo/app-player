@@ -1,0 +1,90 @@
+// *************************************
+//
+//   Config
+//   -> Basic config presets
+//
+// *************************************
+
+// ---------------------------
+// Color palette
+// ---------------------------
+
+// ----- Basic colors ----- //
+$white: #fff;
+$black: #000;
+$transparent: transparent;
+
+// ----- Main palette  ----- //
+$color-primary: #ef6c00 !default;
+
+// ----- Greyscale  ----- //
+$grey-lightest: #f4f4f4 !default;
+$grey-lighter: #ddd !default;
+$grey-light: #bbb !default;
+$grey-medium: #999 !default;
+$grey-dark: #747474 !default;
+$grey-darker: #555 !default;
+$grey-darkest: #333 !default;
+
+// ---------------------------
+// Typography
+// ---------------------------
+
+$font-size-default: 16px;
+$font-family-primary: 'Roboto', Helvetica, Arial, sans-serif;
+
+// ----- Font Weights  ----- //
+$font-weight-bold: bold;
+$font-weight-regular: normal;
+
+// ----- Font sizes  ----- //
+$font-size-xl: 1.625rem !default;
+$font-size-l: 1.313rem !default;
+$font-size-m: 1rem !default;
+$font-size-s: .875rem !default;
+$font-size-xs: .625rem !default;
+
+// ----- Font grayscale  ----- //
+$font-color-primary: $black;
+$font-color-secondary: rgba(0, 0, 0, .54);
+$font-color-disabled: rgba(0, 0, 0, .38);
+
+// -------------------------------------
+//   Grid
+// -------------------------------------
+
+// ----- Units ----- //
+// $grid-unit: 10px;
+
+// Size in px
+$grid-column-width: 81px;
+$grid-gutter: 6px;
+
+$grid-columns: 12;
+
+$grid-max-width: $grid-column-width * $grid-columns + $grid-gutter * ($grid-columns - 1);
+
+// ----- Columns ----- //
+
+$grid-column-1: percentage($grid-column-width * 1 / $grid-max-width);
+$grid-column-2: percentage(($grid-column-width * 2 + $grid-gutter * 1) / $grid-max-width);
+$grid-column-3: percentage(($grid-column-width * 3 + $grid-gutter * 2) / $grid-max-width);
+$grid-column-4: percentage(($grid-column-width * 4 + $grid-gutter * 3) / $grid-max-width);
+$grid-column-5: percentage(($grid-column-width * 5 + $grid-gutter * 4) / $grid-max-width);
+$grid-column-6: percentage(($grid-column-width * 6 + $grid-gutter * 5) / $grid-max-width);
+$grid-column-7: percentage(($grid-column-width * 7 + $grid-gutter * 6) / $grid-max-width);
+$grid-column-8: percentage(($grid-column-width * 8 + $grid-gutter * 7) / $grid-max-width);
+$grid-column-9: percentage(($grid-column-width * 9 + $grid-gutter * 8) / $grid-max-width);
+$grid-column-10: percentage(($grid-column-width * 10 + $grid-gutter * 9) / $grid-max-width);
+$grid-column-11: percentage(($grid-column-width * 11 + $grid-gutter * 10) / $grid-max-width);
+$grid-column-12: percentage(($grid-column-width * 12 + $grid-gutter * 11) / $grid-max-width);
+
+// ---------------------------
+// Inbox
+// ---------------------------
+$box-shadow-default: 0 1px 2px 0 rgba(0, 0, 0, .1), 0 1px 5px 0 rgba(0, 0, 0, .07), 0 3px 1px -2px rgba(0, 0, 0, .09);
+$box-shadow-default-hover: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
+
+$border-default: 1px solid $grey-lighter;
+
+$background-overlay: rgba(0, 0, 0, .7);
