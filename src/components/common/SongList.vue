@@ -23,7 +23,7 @@ import AlbumArtwork from '@/components/common/AlbumArtwork';
 
 export default {
   name: 'song-list',
-  props: ['listContent'],
+  props: ['listContent', 'addable'],
   methods: {
     play(songId, index) {
       this.$emit('play-song', songId, index);

@@ -9,6 +9,7 @@
       <button type="button" @click="listVisibility = false;">Cerrar</button>
       <song-list @play-song="playSelected"
                  @queue-song="queueSelected"
+                 :addable="true"
                  :list-content="$store.state.searchResults"></song-list>
     </div>
   </div>
@@ -20,10 +21,11 @@ import { search } from '@/api';
 
 export default {
   name: 'song-search',
-  data: function data() {
+  data() {
     return {
       searchQuery: '',
       listVisibility: false,
+      errors: [],
     };
   },
   methods: {
@@ -44,17 +46,17 @@ export default {
       });
     },
     playSelected(songId) {
-      const filteredSong = this.$store.state.searchResults.find(song => song.id === songId);
-      this.$store.state.selectedSong = filteredSong;
+      const filteredSong = this.$store.getters.filterSongById(songId);
+      this.$store.commit('PLAY_SONG', filteredSong);
       this.$store.state.audio.addEventListener('loadeddata', () => {
         this.$store.state.audio.play();
-        this.$store.state.isPlaying = true;
         this.searchQuery = '';
       });
     },
     queueSelected(songId) {
-      const AlreadyQueued = this.$store.state.myQueue.some(song => song.id === songId);
-      const filteredSong = this.$store.state.searchResults.find(song => song.id === songId);
+      const AlreadyQueued = this.$store.state.getters.AlreadyQueued(songId);
+      const filteredSong = this.$store.getters.filterSongById(songId);
+
       if (!AlreadyQueued) {
         this.$store.state.myQueue.push(filteredSong);
         localStorage.setItem('queue', JSON.stringify(this.$store.state.myQueue));
