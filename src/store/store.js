@@ -23,7 +23,8 @@ export const store = new Vuex.Store({
     mainQueue: [],
   },
   getters: {
-    filterSongById: state => songId => state.searchResults.find(song => song.id === songId),
+    /* eslint-disable */
+    filterSongById: state => (listToFilter, songId) => state[listToFilter].find(song => song.id === songId),
     filterQueued: state => songId => state.myQueue.some(song => song.id === songId),
   },
   mutations: {
@@ -46,9 +47,9 @@ export const store = new Vuex.Store({
     },
   },
   actions: {
-    playSong: ({ commit, getters }, songId, index) => {
-      const filteredSong = getters.filterSongById(songId);
-      commit('PLAY_SONG', filteredSong, index);
+    playSong: ({ commit, getters }, payload) => {
+      const filteredSong = getters.filterSongById(payload.listToFilter, payload.songId);
+      commit('PLAY_SONG', filteredSong, payload.index);
     },
     queueSong: ({ commit, getters }, songId) => {
       const filteredSong = getters.filterSongById(songId);
