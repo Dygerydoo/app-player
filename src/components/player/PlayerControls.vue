@@ -20,14 +20,10 @@ export default {
       this.$store.commit('PAUSE_SONG');
     },
     nextTrack() {
-      const next = this.$store.state.mainQueue[this.$store.state.currentIndexSongQueue + 1];
-      this.$store.state.selectedSong = next;
-      this.$store.state.currentIndexSongQueue = this.$store.state.currentIndexSongQueue + 1;
+      this.$store.commit('NEXT_SONG');
     },
     prevTrack() {
-      const next = this.$store.state.mainQueue[this.$store.state.currentIndexSongQueue - 1];
-      this.$store.state.selectedSong = next;
-      this.$store.state.currentIndexSongQueue = this.$store.state.currentIndexSongQueue - 1;
+      this.$store.commit('PREV_SONG');
     },
   },
 };

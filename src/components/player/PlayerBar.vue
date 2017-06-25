@@ -60,9 +60,7 @@ export default {
     },
     autoPlay() {
       if (this.$store.state.autoPlay) {
-        const next = this.$store.state.mainQueue[this.$store.state.currentIndexSongQueue + 1];
-        this.$store.state.selectedSong = next;
-        this.$store.state.currentIndexSongQueue = this.$store.state.currentIndexSongQueue + 1;
+        this.$store.commit('NEXT_SONG');
       }
     },
   },

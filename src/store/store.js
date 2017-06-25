@@ -46,6 +46,16 @@ export const store = new Vuex.Store({
       state.myQueue.push(selectedSong);
       localStorage.setItem('queue', JSON.stringify(state.myQueue));
     },
+    NEXT_SONG(state) {
+      const nextSong = state.mainQueue[state.currentIndexSongQueue + 1];
+      state.selectedSong = nextSong;
+      state.currentIndexSongQueue = state.currentIndexSongQueue + 1;
+    },
+    PREV_SONG(state) {
+      const prevSong = state.mainQueue[state.currentIndexSongQueue - 1];
+      state.selectedSong = prevSong;
+      state.currentIndexSongQueue = state.currentIndexSongQueue - 1;
+    },
     AUTO_PLAY(state, autoPlay) {
       if (autoPlay) {
         state.autoPlay = true;
