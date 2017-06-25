@@ -23,7 +23,7 @@ import { fetchUser } from '@/api';
 
 export default {
   name: '',
-  data: function data() {
+  data() {
     return {
       errors: [],
     };
@@ -51,12 +51,16 @@ export default {
 @import '~@/assets/stylesheets/foundation/helpers';
 
 .app-UserProfile {
-  display: flex;
   width: 60%;
+  padding: 1em;
+  margin: 1em auto;
+}
+
+.app-UserProfileContainer {
+  display: flex;
   padding: 1em;
   border: $border-default;
   border-radius: 2px;
-  margin: 1em auto;
   background: $white;
 }
 

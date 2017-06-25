@@ -113,6 +113,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   width: 60%;
+  min-width: 250px;
   max-width: 250px;
 }
 
