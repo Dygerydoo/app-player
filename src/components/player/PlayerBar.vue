@@ -58,11 +58,19 @@ export default {
       this.currentTime = this.$store.state.audio.currentTime;
       this.$refs.songProgress.setAttribute('style', `width: ${(((this.currentTime / this.$store.state.audioDuration) * 100))}%`);
     },
+    autoPlay() {
+      if (this.$store.state.autoPlay) {
+        const next = this.$store.state.mainQueue[this.$store.state.currentIndexSongQueue + 1];
+        this.$store.state.selectedSong = next;
+        this.$store.state.currentIndexSongQueue = this.$store.state.currentIndexSongQueue + 1;
+      }
+    },
   },
   mounted() {
     this.$store.state.audio = this.$el.querySelectorAll('audio')[0];
     this.$store.state.audio.addEventListener('loadeddata', this.manageAudioLoad);
     this.$store.state.audio.addEventListener('timeupdate', this.currentAudioTime);
+    this.$store.state.audio.addEventListener('ended', this.autoPlay);
   },
   components: {
     PlayerControls,

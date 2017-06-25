@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
     audioDuration: '',
     isPlaying: false,
     isPaused: false,
+    autoPlay: false,
     searchResults: [],
     selectedSong: {},
     ownerUser: {},
@@ -45,11 +46,17 @@ export const store = new Vuex.Store({
       state.myQueue.push(selectedSong);
       localStorage.setItem('queue', JSON.stringify(state.myQueue));
     },
+    AUTO_PLAY(state, autoPlay) {
+      if (autoPlay) {
+        state.autoPlay = true;
+      }
+    },
   },
   actions: {
     playSong: ({ commit, getters }, payload) => {
       const filteredSong = getters.filterSongById(payload.listToFilter, payload.songId);
       commit('PLAY_SONG', filteredSong, payload.index);
+      commit('AUTO_PLAY', payload.autoPlay);
     },
     queueSong: ({ commit, getters }, songId) => {
       const filteredSong = getters.filterSongById(songId);

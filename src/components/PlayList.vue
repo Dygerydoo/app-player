@@ -21,7 +21,7 @@ export default {
     playSelected(songId, index) {
       this.$store.state.mainQueue = this.$store.state.myQueue;
       this.$store.state.currentIndexSongQueue = index;
-      this.$store.dispatch('playSong', { listToFilter: 'myQueue', songId, index });
+      this.$store.dispatch('playSong', { listToFilter: 'myQueue', autoPlay: true, songId, index });
     },
     emptyQueue() {
       localStorage.removeItem('queue');
