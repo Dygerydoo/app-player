@@ -49,24 +49,11 @@ export default {
         this.errors.push(e);
       });
     },
-    playSelected(songId) {
-      const filteredSong = this.$store.getters.filterSongById(songId);
-      this.$store.commit('PLAY_SONG', filteredSong);
-      this.$store.state.audio.addEventListener('loadeddata', () => {
-        this.$store.state.audio.play();
-        this.searchQuery = '';
-      });
+    playSelected(songId, index) {
+      this.$store.dispatch('playSong', songId, index);
     },
     queueSelected(songId) {
-      const AlreadyQueued = this.$store.getters.AlreadyQueued(songId);
-      const filteredSong = this.$store.getters.filterSongById(songId);
-
-      if (!AlreadyQueued) {
-        this.$store.state.myQueue.push(filteredSong);
-        localStorage.setItem('queue', JSON.stringify(this.$store.state.myQueue));
-      } else {
-        alert('Ya ha sido añadida');
-      }
+      this.$store.dispatch('queueSong', songId);
     },
   },
   components: {

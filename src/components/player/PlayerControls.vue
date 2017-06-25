@@ -17,9 +17,7 @@ export default {
       this.$store.state.isPlaying = true;
     },
     pauseMedia() {
-      this.$store.state.audio.pause();
-      this.$store.state.isPlaying = false;
-      this.$store.state.isPaused = true;
+      this.$store.commit('PAUSE_SONG');
     },
     nextTrack() {
       const next = this.$store.state.mainQueue[this.$store.state.currentIndexSongQueue + 1];
