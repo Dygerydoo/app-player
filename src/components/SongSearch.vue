@@ -53,7 +53,7 @@ export default {
       this.$store.dispatch('playSong', { listToFilter: 'searchResults', songId, index });
     },
     queueSelected(songId) {
-      this.$store.dispatch('queueSong', songId);
+      this.$store.dispatch('queueSong', { listToFilter: 'searchResults', songId });
     },
   },
   components: {

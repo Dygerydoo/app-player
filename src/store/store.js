@@ -68,9 +68,9 @@ export const store = new Vuex.Store({
       commit('PLAY_SONG', filteredSong, payload.index);
       commit('AUTO_PLAY', payload.autoPlay);
     },
-    queueSong: ({ commit, getters }, songId) => {
-      const filteredSong = getters.filterSongById(songId);
-      const AlreadyQueued = getters.filterQueued(songId);
+    queueSong: ({ commit, getters }, payload) => {
+      const filteredSong = getters.filterSongById(payload.listToFilter, payload.songId);
+      const AlreadyQueued = getters.filterQueued(payload.songId);
       if (!AlreadyQueued) {
         commit('QUEUE_SONG', filteredSong);
       } else {
