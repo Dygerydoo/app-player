@@ -67,7 +67,6 @@ export default {
       'getCurrentTime',
       'getSeekProgress',
     ]),
-    /* eslint-disable */
     updateSeek: {
       get() {
         return this.$store.state.currentTime;
