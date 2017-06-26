@@ -22,7 +22,7 @@
 import { fetchUser } from '@/api';
 
 export default {
-  name: '',
+  name: 'user-profile',
   data() {
     return {
       errors: [],

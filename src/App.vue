@@ -1,7 +1,9 @@
 <template>
   <main id="app">
     <header class="app-Header">
-      <a class="app-Header_Logo" href="/"><img src="./assets/logo.png"></a>
+      <a class="app-Header_Logo" href="/">
+        <img src="./assets/logo.jpg">
+      </a>
       <song-search></song-search>
     </header>
     <router-view></router-view>

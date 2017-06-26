@@ -1,6 +1,7 @@
 <template>
   <div class="app-Player">
-    <div v-if="$store.state.isPlaying || $store.state.isPaused" class="app-Player_ProgressBar">
+    <div v-if="$store.state.isPlaying || $store.state.isPaused"
+         class="app-Player_ProgressBar">
       <input type="range"
              class="app-ProgressBar_Range"
              min="0"
@@ -8,9 +9,12 @@
              v-model="$store.state.audio.currentTime">
       <span ref="songProgress" class="app-Player_CurrentProgress"></span>
     </div>
-    <div class="wrapper" v-cloak>
-      <div class="app-Player_AlbumCover" v-show="$store.state.isPlaying || $store.state.isPaused">
-        <album-artwork :src="songData.artwork" :alt="songData.artist" :size="90"></album-artwork>
+    <div v-cloak class="wrapper">
+      <div class="app-Player_AlbumCover"
+           v-show="$store.state.isPlaying || $store.state.isPaused">
+        <album-artwork :src="songData.artwork"
+                       :alt="songData.artist"
+                      :size="90"></album-artwork>
       </div>
       <div class="app-Player_CurrentSong">
         <p class="app-Player_SongName">{{songData.title}}</p>

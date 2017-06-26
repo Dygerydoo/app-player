@@ -1,7 +1,9 @@
 <template>
   <ul class="app-SongList">
     <li class="app-SongList_Item" v-for="(song, index) in listContent">
-      <album-artwork :src="song.artwork" alt="'song.title'" :size="45"></album-artwork>
+      <album-artwork :src="song.artwork"
+                     alt="'song.title'"
+                     :size="45"></album-artwork>
       <div class="app-SongList_ItemData">
         <p class="app-SongList_ItemTitle">{{song.title}}</p>
         <small class="app-SongSearch_ItemSubtitle">
@@ -9,11 +11,13 @@
         </small>
       </div>
       <div class="app-SongList_Buttons">
-        <button class="app-Buttons_Primary-flatRounded" @click="play(song.id, index)">
-          <i class="material-icons">play_arrow</i></button>
-        <button v-if="addable" class="app-Buttons_Primary-flatRounded" @click="queue(song.id, index)">
-          <i class="material-icons">playlist_add</i>
-        </button>
+        <button class="app-Buttons_Primary-flatRounded"
+                @click="play(song.id, index)">
+                <i class="material-icons">play_arrow</i></button>
+        <button v-if="addable"
+                class="app-Buttons_Primary-flatRounded"
+                @click="queue(song.id, index)">
+                <i class="material-icons">playlist_add</i></button>
       </div>
     </li>
   </ul>

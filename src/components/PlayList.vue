@@ -2,11 +2,14 @@
   <div class="app-Queue">
     <h1>Tu cola de reproducción</h1>
     <template v-if="!queueIsEmpty">
-      <button type="button" class="app-Button_Primary" @click="emptyQueue">Borrar cola</button>
+      <button type="button"
+              class="app-Button_Primary"
+              @click="emptyQueue">Borrar cola</button>
       <song-list :list-content="$store.state.myQueue"
                  @play-song="playSelected"></song-list>
     </template>
-    <div class="app-Queue_Empty" v-else>
+    <div v-else
+         class="app-Queue_Empty">
       <h3>Todavía no has añadido nada a tu cola de reproducción</h3>
       <p>Puedes añadir canciones usando el buscador en la parte superior</p>
     </div>

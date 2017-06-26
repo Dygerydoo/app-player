@@ -68,6 +68,10 @@ export default {
 .app-SongSearch {
   width: 100%;
   max-width: 600px;
+
+  @include mq(mobile) {
+    max-width: 250px;
+  }
 }
 
 .app-SongSearch_Results {
