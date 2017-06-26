@@ -64,3 +64,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+// ---------------------------
+// Inbox
+// ---------------------------
+
+input[type=range]::-moz-focus-outer {
+  border: 0;
+}
+
+input[type=range]::-moz-range-track {
+  background-color: $transparent;
+}
