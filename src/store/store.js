@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+const QUEUE_KEY = process.env.QUEUE_KEY;
+
 const storagePlaylist = {
   fetch() {
-    return JSON.parse(localStorage.getItem('queue') || '[]');
+    return JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]');
   },
 };
 
@@ -44,7 +46,7 @@ export const store = new Vuex.Store({
     },
     QUEUE_SONG(state, selectedSong) {
       state.myQueue.push(selectedSong);
-      localStorage.setItem('queue', JSON.stringify(state.myQueue));
+      localStorage.setItem(QUEUE_KEY, JSON.stringify(state.myQueue));
     },
     NEXT_SONG(state) {
       const nextSong = state.mainQueue[state.currentIndexSongQueue + 1];

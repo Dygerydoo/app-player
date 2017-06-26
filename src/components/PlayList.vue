@@ -24,7 +24,7 @@ export default {
       this.$store.dispatch('playSong', { listToFilter: 'myQueue', autoPlay: true, songId, index });
     },
     emptyQueue() {
-      localStorage.removeItem('queue');
+      localStorage.removeItem(process.env.QUEUE_KEY);
       this.$store.state.myQueue = [];
     },
     filterSongById(songId) {
