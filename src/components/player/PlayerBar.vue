@@ -3,11 +3,13 @@
     <div v-if="$store.state.isPlaying || $store.state.isPaused"
          class="app-Player_ProgressBar">
       <input type="range"
+             id="caca"
              class="app-ProgressBar_Range"
              min="0"
-             :max="$store.state.audio.duration"
-             v-model="$store.state.audio.currentTime">
-      <span ref="songProgress" class="app-Player_CurrentProgress"></span>
+             :max="getAudioDuration()"
+             v-model="updateSeek">
+      <span class="app-Player_CurrentProgress"
+            :style="{ width: getSeekProgress() }"></span>
     </div>
     <div v-cloak class="wrapper">
       <div class="app-Player_AlbumCover"
@@ -28,7 +30,7 @@
       <router-link to="/queue"><i class="material-icons">view_list</i></router-link>
     </nav>
     <div class="app-Player_SongTimer">
-      <small>{{currentTime | humanizeTime}}/{{$store.state.audioDuration | humanizeTime}}</small>
+      <small>{{getCurrentTime() | humanizeTime}}/{{getAudioDuration() | humanizeTime}}</small>
     </div>
     <audio id="playerId" ref="audiofile" :src="songData.stream" preload="auto" style="display:none;"></audio>
   </div>
@@ -37,6 +39,7 @@
 <script>
 import PlayerControls from '@/components/player/PlayerControls';
 import AlbumArtwork from '@/components/common/AlbumArtwork';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'player-bar',
@@ -45,31 +48,37 @@ export default {
       type: Object,
     },
   },
-  data() {
-    return {
-      loaded: false,
-      currentTime: 0,
-    };
-  },
   methods: {
     manageAudioLoad() {
       if (this.$store.state.audio.readyState >= 2) {
-        this.loaded = true;
-        this.$store.state.audioDuration = this.$store.state.audio.duration;
+        this.$store.commit('SET_AUDIO_DURATION');
       }
     },
     currentAudioTime() {
-      this.currentTime = this.$store.state.audio.currentTime;
-      this.$refs.songProgress.setAttribute('style', `width: ${(((this.currentTime / this.$store.state.audioDuration) * 100))}%`);
+      this.$store.commit('CURRENT_AUDIO_TIME');
     },
     autoPlay() {
-      if (this.$store.state.autoPlay) {
-        this.$store.commit('NEXT_SONG');
-      }
+      this.$store.dispatch('autoPlay');
+    },
+  },
+  computed: {
+    ...mapGetters([
+      'getAudioDuration',
+      'getCurrentTime',
+      'getSeekProgress',
+    ]),
+    /* eslint-disable */
+    updateSeek: {
+      get() {
+        return this.$store.state.currentTime;
+      },
+      set(value) {
+        this.$store.dispatch('updateSeek', Number(value));
+      },
     },
   },
   mounted() {
-    this.$store.state.audio = this.$el.querySelectorAll('audio')[0];
+    this.$store.commit('GET_AUDIO', this.$el.querySelectorAll('audio')[0]);
     this.$store.state.audio.addEventListener('loadeddata', this.manageAudioLoad);
     this.$store.state.audio.addEventListener('timeupdate', this.currentAudioTime);
     this.$store.state.audio.addEventListener('ended', this.autoPlay);

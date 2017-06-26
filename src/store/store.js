@@ -15,9 +15,11 @@ export const store = new Vuex.Store({
   state: {
     audio: '',
     audioDuration: '',
+    currentTime: 0,
+    seekProgress: 0,
     isPlaying: false,
     isPaused: false,
-    autoPlay: false,
+    autoPlay: undefined,
     searchResults: [],
     selectedSong: {},
     ownerUser: {},
@@ -29,8 +31,14 @@ export const store = new Vuex.Store({
     /* eslint-disable */
     filterSongById: state => (listToFilter, songId) => state[listToFilter].find(song => song.id === songId),
     filterQueued: state => songId => state.myQueue.some(song => song.id === songId),
+    getAudioDuration: state => () => state.audioDuration,
+    getCurrentTime: state => () => state.currentTime,
+    getSeekProgress: state => () => state.seekProgress,
   },
   mutations: {
+    GET_AUDIO(state, audio) {
+      state.audio = audio;
+    },
     PLAY_SONG(state, selectedSong) {
       state.isPlaying = true;
       state.isPaused = false;
@@ -59,13 +67,22 @@ export const store = new Vuex.Store({
       state.currentIndexSongQueue = state.currentIndexSongQueue - 1;
     },
     AUTO_PLAY(state, autoPlay) {
-      if (autoPlay) {
-        state.autoPlay = true;
-      }
+      state.autoPlay = autoPlay;
     },
     REMOVE_QUEUE(state) {
       localStorage.removeItem(process.env.QUEUE_KEY);
       state.myQueue = [];
+    },
+    SET_AUDIO_DURATION(state) {
+      state.audioDuration = state.audio.duration;
+    },
+    CURRENT_AUDIO_TIME(state, payload) {
+      if (payload) {
+        state.audio.currentTime = payload;
+        state.currentTime = payload;
+      }
+      state.currentTime = state.audio.currentTime;
+      state.seekProgress = `${(((state.currentTime / state.audioDuration) * 100))}%`
     },
   },
   actions: {
@@ -82,6 +99,14 @@ export const store = new Vuex.Store({
       } else {
         alert('Ya ha sido añadida');
       }
+    },
+    autoPlay: ({commit, state}) => {
+      if (state.autoPlay === true) {
+        commit('NEXT_SONG');
+      }
+    },
+    updateSeek: ({ commit }, payload) => {
+      commit('CURRENT_AUDIO_TIME', payload);
     },
   },
 });

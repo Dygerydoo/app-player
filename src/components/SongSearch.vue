@@ -50,7 +50,7 @@ export default {
       });
     },
     playSelected(songId, index) {
-      this.$store.dispatch('playSong', { listToFilter: 'searchResults', songId, index });
+      this.$store.dispatch('playSong', { listToFilter: 'searchResults', autoPlay: false, songId, index });
     },
     queueSelected(songId) {
       this.$store.dispatch('queueSong', { listToFilter: 'searchResults', songId });
