@@ -63,6 +63,10 @@ export const store = new Vuex.Store({
         state.autoPlay = true;
       }
     },
+    REMOVE_QUEUE(state) {
+      localStorage.removeItem(process.env.QUEUE_KEY);
+      state.myQueue = [];
+    },
   },
   actions: {
     playSong: ({ commit, getters }, payload) => {
