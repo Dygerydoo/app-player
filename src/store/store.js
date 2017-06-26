@@ -29,6 +29,7 @@ export const store = new Vuex.Store({
   },
   getters: {
     /* eslint-disable */
+    autoPlay: state => () => state.autoPlay,
     filterSongById: state => (listToFilter, songId) => state[listToFilter].find(song => song.id === songId),
     filterQueued: state => songId => state.myQueue.some(song => song.id === songId),
     getAudioDuration: state => () => state.audioDuration,
@@ -39,10 +40,11 @@ export const store = new Vuex.Store({
     GET_AUDIO(state, audio) {
       state.audio = audio;
     },
-    PLAY_SONG(state, selectedSong) {
+    PLAY_SONG(state, payload) {
       state.isPlaying = true;
       state.isPaused = false;
-      state.selectedSong = selectedSong;
+      state.selectedSong = payload.filteredSong;
+      state.currentIndexSongQueue = payload.index;
       state.audio.addEventListener('loadeddata', () => {
         state.audio.play();
       });
@@ -57,14 +59,25 @@ export const store = new Vuex.Store({
       localStorage.setItem(QUEUE_KEY, JSON.stringify(state.myQueue));
     },
     NEXT_SONG(state) {
-      const nextSong = state.mainQueue[state.currentIndexSongQueue + 1];
-      state.selectedSong = nextSong;
-      state.currentIndexSongQueue = state.currentIndexSongQueue + 1;
+      if (state.currentIndexSongQueue >= (state.mainQueue.length - 1) && state.autoPlay) {
+        state.selectedSong = state.mainQueue[0];
+        state.currentIndexSongQueue = 0;
+      } else {
+        const nextSong = state.mainQueue[state.currentIndexSongQueue + 1];
+        state.selectedSong = nextSong;
+        state.currentIndexSongQueue = state.mainQueue.indexOf(nextSong);
+      }
     },
     PREV_SONG(state) {
-      const prevSong = state.mainQueue[state.currentIndexSongQueue - 1];
-      state.selectedSong = prevSong;
-      state.currentIndexSongQueue = state.currentIndexSongQueue - 1;
+      if (state.currentIndexSongQueue <= (state.mainQueue.length - 1) && state.autoPlay) {
+        const lastSong = state.mainQueue.length - 1;
+        state.selectedSong = state.mainQueue[lastSong];
+        state.currentIndexSongQueue = lastSong;
+      } else {
+        const prevSong = state.mainQueue[state.currentIndexSongQueue - 1];
+        state.selectedSong = prevSong;
+        state.currentIndexSongQueue = state.mainQueue.indexOf(prevSong);
+      }
     },
     AUTO_PLAY(state, autoPlay) {
       state.autoPlay = autoPlay;
@@ -88,8 +101,9 @@ export const store = new Vuex.Store({
   actions: {
     playSong: ({ commit, getters }, payload) => {
       const filteredSong = getters.filterSongById(payload.listToFilter, payload.songId);
-      commit('PLAY_SONG', filteredSong, payload.index);
+      commit('PLAY_SONG', { filteredSong, index: payload.index });
       commit('AUTO_PLAY', payload.autoPlay);
+      console.log(payload.autoPlay);
     },
     queueSong: ({ commit, getters }, payload) => {
       const filteredSong = getters.filterSongById(payload.listToFilter, payload.songId);
@@ -103,6 +117,9 @@ export const store = new Vuex.Store({
     autoPlay: ({commit, state}) => {
       if (state.autoPlay === true) {
         commit('NEXT_SONG');
+        console.log('ITS TRUE');
+      } else {
+        console.log('ITS FALSE');
       }
     },
     updateSeek: ({ commit }, payload) => {

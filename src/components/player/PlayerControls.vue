@@ -1,6 +1,7 @@
 <template>
   <div class="app-PlayerControls">
     <button class="app-Buttons_Primary-flatRounded"
+            :class="{'inactive' : !autoPlay()}"
             @click="prevTrack">
       <i class="material-icons">skip_previous</i></button>
     <button v-if="$store.state.isPlaying"
@@ -12,6 +13,7 @@
             @click="playMedia()">
             <i class="material-icons">play_arrow</i></button>
     <button class="app-Buttons_Primary-flatRounded"
+            :class="{'inactive' : !autoPlay()}"
             @click="nextTrack">
             <i class="material-icons">skip_next</i></button>
   </div>
@@ -20,6 +22,11 @@
 <script>
 export default {
   name: 'player-controls',
+  data() {
+    return {
+      autoPlay: this.$store.getters.autoPlay,
+    };
+  },
   methods: {
     playMedia() {
       this.$store.state.isPaused = false;
@@ -36,6 +43,9 @@ export default {
       this.$store.commit('PREV_SONG');
     },
   },
+  computed: {
+
+  },
 };
 </script>
 
@@ -48,5 +58,9 @@ export default {
   display: flex;
   flex: 1;
   align-items: center;
+
+  .inactive {
+    opacity: .3;
+  }
 }
 </style>
